@@ -47,12 +47,13 @@
 </p>
 
 <h2>Notes</h2>
+<a href="{% url 'add_note' pk=contact.pk %}">Add Note</a>
+
 {% for note in notes %}
 <div>
-<p>{{ note.contact }}</p>
-<p>{{ note.title }}</p>
-<p>{{ note.text }}</p>
-<p>{{ note.created }}</p>
+<p><strong>{{ note.title }}</strong></p>
+    <p>{{ note.text }}</p>
+    <p>Date created: {{ note.created }}</p>
 </div>
 {% endfor %}
 
