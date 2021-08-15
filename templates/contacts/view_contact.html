@@ -46,16 +46,27 @@
     <a class="red" href="{% url 'delete_contact' pk=contact.pk %}">Delete Contact</a>
 </p>
 
-<h2>Notes</h2>
-<a href="{% url 'add_note' pk=contact.pk %}">Add Note</a>
-
-{% for note in notes %}
+<h3>Add Note</h3>
 <div>
+    <form action="{% url 'add_note' contact_pk=contact.pk %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div>
+        <button type="submit">Add Note</button>
+    </div>
+    </form>
+</div>
+{% if contact.notes %}
+<h3>All Notes for {{ contact.name }}</h3>
+{% for note in contact.notes.all %}
+<div>
+<hr>
 <p><strong>{{ note.title }}</strong></p>
     <p>{{ note.text }}</p>
-    <p>Date created: {{ note.created }}</p>
+    <p><small><i>Date created: {{ note.created }}</i></small></text></p>
 </div>
 {% endfor %}
+{% endif %}
 
 </div>
 {% endblock %}
